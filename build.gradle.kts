@@ -25,10 +25,16 @@ dependencies {
     implementation("com.google.guava:guava:28.0-jre")
 
     // Use JUnit test framework
-    testImplementation("junit:junit:4.12")
+    // use the latest JUnit 4.x release (stable)
+    testImplementation("junit:junit:4.13.2")
 }
 
 application {
     // Define the main class for the application
     mainClassName = "Complicated.Calculator.App"
+}
+
+// Explicitly configure the test task to use JUnit 4 (safe for existing JUnit4 tests)
+tasks.test {
+    useJUnit()
 }

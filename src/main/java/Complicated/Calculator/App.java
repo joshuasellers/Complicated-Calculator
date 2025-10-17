@@ -3,6 +3,8 @@
  */
 package Complicated.Calculator;
 
+import javax.swing.JFrame;
+
 public class App {
     public String getGreeting() {
         return "Hello world.";
@@ -10,5 +12,14 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
+        JFrame frame = new JFrame("My First Frame");
+        // Set the default close operation (what happens when the user clicks the 'X' button)
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set the size of the frame
+        frame.setSize(400, 300);
+
+        // Make the frame visible
+        frame.setVisible(true);
     }
 }

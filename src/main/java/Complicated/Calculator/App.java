@@ -4,6 +4,10 @@
 package Complicated.Calculator;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
 
 public class App {
     public String getGreeting() {
@@ -18,6 +22,14 @@ public class App {
 
         // Set the size of the frame
         frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Click Me!");
+        JLabel displayLabel = new JLabel("Welcome to the application!");
+
+        panel.add(button);
+        panel.add(displayLabel);
+        frame.add(panel, BorderLayout.CENTER); // Add the panel to the center of the frame
 
         // Make the frame visible
         frame.setVisible(true);

@@ -1,5 +1,6 @@
 # Ignore Gradle project-specific cache directory
 .gradle
+bin/
 
 # Ignore IDE-specific files
 .vscode
@@ -9,3 +10,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# Operating System specific
+.DS_Store

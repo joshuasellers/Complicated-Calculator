@@ -16,6 +16,9 @@ public class Calculator {
     private JButton clearButton = new JButton("Clear");
     private JButton equalButton = new JButton("=");
     private JButton plussButton = new JButton("+");
+    private JButton minusButton = new JButton("-"); 
+    private JButton timesButton = new JButton("*");     
+    private JButton divideButton = new JButton("/");
     private JButton zeroButton = new JButton("0");
     private JButton oneButton = new JButton("1");
     private JButton twoButton = new JButton("2");
@@ -54,19 +57,22 @@ public class Calculator {
         container.setLayout(layout);
         // add components to the container using GridBagLayout
         Helper.addobjects(displayLabel, container, layout, gbc, 0, 0, 1, 1);
-        Helper.addobjects(clearButton, container, layout, gbc, 0, 1, 1, 1);
-        Helper.addobjects(equalButton, container, layout, gbc, 2, 4, 1, 1);
-        Helper.addobjects(plussButton, container, layout, gbc, 2, 3, 1, 1);
-        Helper.addobjects(zeroButton, container, layout, gbc, 0, 4, 1, 1);
-        Helper.addobjects(oneButton, container, layout, gbc, 0, 3, 1, 1);
-        Helper.addobjects(twoButton, container, layout, gbc, 1, 3, 1, 1);
-        Helper.addobjects(threeButton, container, layout, gbc, 2, 2, 1, 1);
-        Helper.addobjects(fourButton, container, layout, gbc, 0, 2, 1, 1);
-        Helper.addobjects(fiveButton, container, layout, gbc, 1, 2, 1, 1);
-        Helper.addobjects(sixButton, container, layout, gbc, 2, 1, 1, 1);
-        Helper.addobjects(sevenButton, container, layout, gbc, 0, 1, 1, 1);
-        Helper.addobjects(eightButton, container, layout, gbc, 1, 1, 1, 1);
-        Helper.addobjects(nineButton, container, layout, gbc, 2, 0, 1, 1);
+        Helper.addobjects(clearButton, container, layout, gbc, 0, 2, 1, 1);
+        Helper.addobjects(equalButton, container, layout, gbc, 0, 3, 1, 1);
+        Helper.addobjects(plussButton, container, layout, gbc, 2, 0, 1, 1);
+        Helper.addobjects(minusButton, container, layout, gbc, 2, 1, 1, 1);
+        Helper.addobjects(timesButton, container, layout, gbc, 2, 2, 1, 1);
+        Helper.addobjects(divideButton, container, layout, gbc, 2, 3, 1, 1);
+        Helper.addobjects(zeroButton, container, layout, gbc, 3, 0, 1, 1);
+        Helper.addobjects(oneButton, container, layout, gbc, 3, 1, 1, 1);
+        Helper.addobjects(twoButton, container, layout, gbc, 3, 2, 1, 1);
+        Helper.addobjects(threeButton, container, layout, gbc, 3, 3, 1, 1);
+        Helper.addobjects(fourButton, container, layout, gbc, 4, 0, 1, 1);
+        Helper.addobjects(fiveButton, container, layout, gbc, 4, 1, 1, 1);
+        Helper.addobjects(sixButton, container, layout, gbc, 4, 2, 1, 1);
+        Helper.addobjects(sevenButton, container, layout, gbc, 4, 3, 1, 1);
+        Helper.addobjects(eightButton, container, layout, gbc, 5, 0, 1, 1);
+        Helper.addobjects(nineButton, container, layout, gbc, 5, 1, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -81,15 +87,54 @@ public class Calculator {
         sevenButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "7"));
         eightButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "8"));
         nineButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "9"));
-        plussButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "+"));
+        plussButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
+                !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
+                displayLabel.setText(displayLabel.getText() + " + ");
+            }
+        });
+        minusButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
+                !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
+                displayLabel.setText(displayLabel.getText() + " - ");
+            }
+        });
+        timesButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
+                !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
+                displayLabel.setText(displayLabel.getText() + " * ");
+            }
+        });
+        divideButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
+                !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
+                displayLabel.setText(displayLabel.getText() + " / ");
+            }
+        });
         equalButton.addActionListener(e -> {
             String equation = displayLabel.getText();
-            String[] parts = equation.split("\\+");
-            int sum = 0;
-            for (String part : parts) {
-                sum += Integer.parseInt(part.trim());
+            String[] parts = equation.split(" ");
+            int result = 0;
+            for (int i = 0; i < parts.length; i++) {
+                String part = parts[i];
+                if (part.equals("+") || part.equals("-") || part.equals("*") || part.equals("/")) {
+                    if(part.equals("+") && i + 1 < parts.length) {
+                        result += Integer.parseInt(parts[++i].trim());
+                    } else if(part.equals("-") && i + 1 < parts.length) {
+                        result -= Integer.parseInt(parts[++i].trim());
+                    } else if(part.equals("*") && i + 1 < parts.length) {
+                        result *= Integer.parseInt(parts[++i].trim());
+                    } else if(part.equals("/") && i + 1 < parts.length) {
+                        result /= Integer.parseInt(parts[++i].trim());
+                    }
+                } else {
+                    if (i == 0) {
+                        result = Integer.parseInt(part.trim());
+                    }
+                    continue;
+                }
             }
-            displayLabel.setText(String.valueOf(sum));
+            displayLabel.setText(String.valueOf(result));
         }); 
     }
 }

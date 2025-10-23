@@ -53,20 +53,20 @@ public class Calculator {
         layout = new GridBagLayout();
         container.setLayout(layout);
         // add components to the container using GridBagLayout
-        addobjects(displayLabel, container, layout, gbc, 0, 0, 1, 1);
-        addobjects(clearButton, container, layout, gbc, 0, 1, 1, 1);
-        addobjects(equalButton, container, layout, gbc, 2, 4, 1, 1);
-        addobjects(plussButton, container, layout, gbc, 2, 3, 1, 1);
-        addobjects(zeroButton, container, layout, gbc, 0, 4, 1, 1);
-        addobjects(oneButton, container, layout, gbc, 0, 3, 1, 1);
-        addobjects(twoButton, container, layout, gbc, 1, 3, 1, 1);
-        addobjects(threeButton, container, layout, gbc, 2, 2, 1, 1);
-        addobjects(fourButton, container, layout, gbc, 0, 2, 1, 1);
-        addobjects(fiveButton, container, layout, gbc, 1, 2, 1, 1);
-        addobjects(sixButton, container, layout, gbc, 2, 1, 1, 1);
-        addobjects(sevenButton, container, layout, gbc, 0, 1, 1, 1);
-        addobjects(eightButton, container, layout, gbc, 1, 1, 1, 1);
-        addobjects(nineButton, container, layout, gbc, 2, 0, 1, 1);
+        Helper.addobjects(displayLabel, container, layout, gbc, 0, 0, 1, 1);
+        Helper.addobjects(clearButton, container, layout, gbc, 0, 1, 1, 1);
+        Helper.addobjects(equalButton, container, layout, gbc, 2, 4, 1, 1);
+        Helper.addobjects(plussButton, container, layout, gbc, 2, 3, 1, 1);
+        Helper.addobjects(zeroButton, container, layout, gbc, 0, 4, 1, 1);
+        Helper.addobjects(oneButton, container, layout, gbc, 0, 3, 1, 1);
+        Helper.addobjects(twoButton, container, layout, gbc, 1, 3, 1, 1);
+        Helper.addobjects(threeButton, container, layout, gbc, 2, 2, 1, 1);
+        Helper.addobjects(fourButton, container, layout, gbc, 0, 2, 1, 1);
+        Helper.addobjects(fiveButton, container, layout, gbc, 1, 2, 1, 1);
+        Helper.addobjects(sixButton, container, layout, gbc, 2, 1, 1, 1);
+        Helper.addobjects(sevenButton, container, layout, gbc, 0, 1, 1, 1);
+        Helper.addobjects(eightButton, container, layout, gbc, 1, 1, 1, 1);
+        Helper.addobjects(nineButton, container, layout, gbc, 2, 0, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -92,18 +92,4 @@ public class Calculator {
             displayLabel.setText(String.valueOf(sum));
         }); 
     }
-
-    private void addobjects(Component c, Container container, GridBagLayout layout, 
-                                GridBagConstraints gbc, int gx, int gy, int gw, int gh){
-
-        gbc.gridx = gx;
-        gbc.gridy = gy;
-
-        gbc.gridwidth = gw;
-        gbc.gridheight = gh;
-
-        layout.setConstraints(c, gbc);
-        container.add(c);
-    }
-    
 }

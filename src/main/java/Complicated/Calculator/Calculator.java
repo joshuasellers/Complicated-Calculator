@@ -34,6 +34,9 @@ public class Calculator {
     private JPanel container;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
+    // Store current input and result
+    private String currentInput = "";
+    private int currentResult = 0;
 
     public Calculator(int width, int height, String title) {
         // Initialize the JFrame
@@ -76,39 +79,43 @@ public class Calculator {
         // add container to frame
         frame.add(container);
         // add button action listener
-        clearButton.addActionListener(e -> displayLabel.setText("0"));
-        zeroButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "0"));
-        oneButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "1"));
-        twoButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "2"));
-        threeButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "3"));
-        fourButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "4"));
-        fiveButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "5"));
-        sixButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "6"));
-        sevenButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "7"));
-        eightButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "8"));
-        nineButton.addActionListener(e -> displayLabel.setText(displayLabel.getText() + "9"));
+        clearButton.addActionListener(e -> {
+            displayLabel.setText("0");
+            currentInput = "";
+            currentResult = 0;
+        });
+        zeroButton.addActionListener(e -> updateInput("0"));
+        oneButton.addActionListener(e -> updateInput("1"));
+        twoButton.addActionListener(e -> updateInput("2"));
+        threeButton.addActionListener(e -> updateInput("3"));
+        fourButton.addActionListener(e -> updateInput("4"));
+        fiveButton.addActionListener(e -> updateInput("5"));
+        sixButton.addActionListener(e -> updateInput("6"));
+        sevenButton.addActionListener(e -> updateInput("7"));
+        eightButton.addActionListener(e -> updateInput("8"));
+        nineButton.addActionListener(e -> updateInput("9"));
         plussButton.addActionListener(e -> {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
-                displayLabel.setText(displayLabel.getText() + " + ");
+                updateInput(" + ");
             }
         });
         minusButton.addActionListener(e -> {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
-                displayLabel.setText(displayLabel.getText() + " - ");
+                updateInput(" - ");
             }
         });
         timesButton.addActionListener(e -> {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
-                displayLabel.setText(displayLabel.getText() + " * ");
+                updateInput(" * ");
             }
         });
         divideButton.addActionListener(e -> {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
-                displayLabel.setText(displayLabel.getText() + " / ");
+                updateInput(" / ");
             }
         });
         equalButton.addActionListener(e -> {
@@ -135,6 +142,13 @@ public class Calculator {
                 }
             }
             displayLabel.setText(String.valueOf(result));
+            currentInput = String.valueOf(result);
+            currentResult = result;
         }); 
+    }
+
+    private void updateInput(String input) {
+        displayLabel.setText(displayLabel.getText() + input);
+        currentInput += input;
     }
 }

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class App {
 
     public static void main(String[] args) {
-        Calculator calc = new Calculator(400, 300, "Complicated Calculator");
+        Calculator calc = new Calculator(500, 300, "Complicated Calculator");
         JFrame frame = calc.getCalculatorFrame();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

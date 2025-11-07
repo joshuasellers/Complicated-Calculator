@@ -6,9 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Component;
-import java.awt.Container;
-import java.util.List;
 
 public class Calculator {
     // Calculator logic will go here
@@ -20,6 +17,7 @@ public class Calculator {
     private JButton minusButton = new JButton("-"); 
     private JButton timesButton = new JButton("*");     
     private JButton divideButton = new JButton("/");
+    private JButton powerButton = new JButton("^");
     private JButton leftParenthesisButton = new JButton("(");
     private JButton rightParenthesisButton = new JButton(")");  
     private JButton zeroButton = new JButton("0");
@@ -69,6 +67,7 @@ public class Calculator {
         Helper.addobjects(minusButton, container, layout, gbc, 2, 1, 1, 1);
         Helper.addobjects(timesButton, container, layout, gbc, 2, 2, 1, 1);
         Helper.addobjects(divideButton, container, layout, gbc, 2, 3, 1, 1);
+        Helper.addobjects(powerButton, container, layout, gbc, 1, 0, 1, 1);
         Helper.addobjects(zeroButton, container, layout, gbc, 3, 0, 1, 1);
         Helper.addobjects(oneButton, container, layout, gbc, 3, 1, 1, 1);
         Helper.addobjects(twoButton, container, layout, gbc, 3, 2, 1, 1);
@@ -121,6 +120,12 @@ public class Calculator {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
                 updateInput(" / ");
+            }
+        });
+        powerButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
+                !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
+                updateInput(" ^ ");
             }
         });
         leftParenthesisButton.addActionListener(e -> updateInput(" ( "));

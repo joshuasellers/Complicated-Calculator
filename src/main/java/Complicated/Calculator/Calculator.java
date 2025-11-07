@@ -135,7 +135,16 @@ public class Calculator {
     }
 
     private void updateInput(String input) {
-        displayLabel.setText(displayLabel.getText() + input);
-        currentInput += input;
+        if (displayLabel.getText().equals("0")) {
+            displayLabel.setText(input);
+            currentInput = input;
+        } else if (currentInput.endsWith(")")) {
+            return; // Prevent adding input directly after a closing parenthesis
+        } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" "))){
+            return; // Prevent leading zeros
+        } else{
+            displayLabel.setText(displayLabel.getText() + input);
+            currentInput += input;
+        }
     }
 }

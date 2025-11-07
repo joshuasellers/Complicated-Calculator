@@ -7,8 +7,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void testCalculatorFrameIsNotNull() {
+        // Create a Calculator with the same dimensions/title used by App
+        Calculator calc = new Calculator(400, 300, "Complicated Calculator");
+        assertNotNull("Calculator should provide a non-null JFrame", calc.getCalculatorFrame());
     }
 }

@@ -78,22 +78,24 @@ public final class Helper {
 
             // If the scanned Token is an
             // operand, add it to output
-            if (letterOrDigit(c))
+            if (letterOrDigit(c)) {
                 output += c;
+            }
 
             // If the scanned Token is an '('
             // push it to the stack
-            else if (c == '(')
+            else if (c == '(') {
                 stack.push(c);
+            }
 
             // If the scanned Token is an ')' pop and append
             // it to output from the stack until an '(' is
             // encountered
             else if (c == ')') {
                 while (!stack.isEmpty()
-                       && stack.peek() != '(')
+                       && stack.peek() != '(') {
                     output += stack.pop();
-
+                }
                 stack.pop();
             }
 

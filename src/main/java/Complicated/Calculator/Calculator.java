@@ -140,16 +140,20 @@ public class Calculator {
     }
 
     private void updateInput(String input) {
-        if (displayLabel.getText().equals("0")) {
+        if (displayLabel.getText().equals("0") && !input.equals(" + ") 
+                && !input.equals(" - ") && !input.equals(" * ") 
+                && !input.equals(" / ") && !input.equals(" ^ ")) {
             displayLabel.setText(input);
             currentInput = input;
+            System.out.println("Current Input: " + currentInput);
         } else if (currentInput.endsWith(")")) {
             return; // Prevent adding input directly after a closing parenthesis
-        } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" "))){
+        } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" 0"))){
             return; // Prevent leading zeros
         } else{
             displayLabel.setText(displayLabel.getText() + input);
             currentInput += input;
+            System.out.println("Current Input: " + currentInput);
         }
     }
 }

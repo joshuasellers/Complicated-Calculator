@@ -15,9 +15,9 @@ plugins {
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
+    // Use Maven Central for resolving dependencies. JCenter has been deprecated.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

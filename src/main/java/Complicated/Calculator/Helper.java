@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Stack;
+import java.util.List;
 
 public final class Helper {
     private Helper() {
@@ -26,10 +27,10 @@ public final class Helper {
     }
 
     // Method is used to get the precedence of operators
-    private static boolean letterOrDigit(char c)
+    private static boolean letterOrDigit(String s)
     {
         // boolean check
-        if (Character.isLetterOrDigit(c))
+        if (s.matches("-?\\d+(\\.\\d+)?"))
             return true;
         else
             return false;
@@ -37,22 +38,22 @@ public final class Helper {
 
     // Operator having higher precedence
     // value will be returned
-    static int getPrecedence(char ch)
+    static int getPrecedence(String s)
     {
 
-        if (ch == '+' || ch == '-')
+        if (s.equals("+") || s.equals("-"))
             return 1;
-        else if (ch == '*' || ch == '/')
+        else if (s.equals("*") || s.equals("/"))
             return 2;
-        else if (ch == '^')
+        else if (s.equals("^"))
             return 3;
         else
             return -1;
     }
     
       // Operator has Left --> Right associativity
-      static boolean hasLeftAssociativity(char ch) {
-        if (ch == '+' || ch == '-' || ch == '/' || ch == '*') {
+      static boolean hasLeftAssociativity(String s) {
+        if (s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*")) {
             return true;
         } else {
             return false;
@@ -61,40 +62,42 @@ public final class Helper {
   
     // Method converts  given infixto postfix expression
     // to illustrate shunting yard algorithm
-    static String infixToRpn(String expression)
+    static String infixToRpn(String[] expression)
     {
         // Initialising an empty String
         // (for output) and an empty stack
-        Stack<Character> stack = new Stack<>();
+        Stack<String> stack = new Stack<>();
 
         // Initially empty string taken
         String output = new String("");
 
         // Iterating over tokens using inbuilt
         // .length() function
-        for (int i = 0; i < expression.length(); ++i) {
+        for (int i = 0; i < expression.length; ++i) {
             // Finding character at 'i'th index
-            char c = expression.charAt(i);
+            String s = expression[i];
 
             // If the scanned Token is an
             // operand, add it to output
-            if (letterOrDigit(c)) {
-                output += c;
+            if (letterOrDigit(s)) {
+                output += s;
+                output += " ";
             }
 
             // If the scanned Token is an '('
             // push it to the stack
-            else if (c == '(') {
-                stack.push(c);
+            else if (s.equals("(")) {
+                stack.push(s);
             }
 
             // If the scanned Token is an ')' pop and append
             // it to output from the stack until an '(' is
             // encountered
-            else if (c == ')') {
+            else if (s.equals(")")) {
                 while (!stack.isEmpty()
-                       && stack.peek() != '(') {
+                       && !stack.peek().equals("(")) {
                     output += stack.pop();
+                    output += " ";
                 }
                 stack.pop();
             }
@@ -106,24 +109,26 @@ public final class Helper {
             else {
                 while (
                     !stack.isEmpty()
-                    && getPrecedence(c)
+                    && getPrecedence(s)
                            <= getPrecedence(stack.peek()) 
-                    && hasLeftAssociativity(c)) {
+                    && hasLeftAssociativity(s)) {
                     // peek() inbuilt stack function to
                     // fetch the top element(token)
 
                     output += stack.pop();
+                    output += " ";
                 }
-                stack.push(c);
+                stack.push(s);
             }
         }
 
         // pop all the remaining operators from
         // the stack and append them to output
         while (!stack.isEmpty()) {
-            if (stack.peek() == '(')
+            if (stack.peek().equals("("))
                 return "This expression is invalid";
             output += stack.pop();
+            output += " ";
         }
         return output;
     }
@@ -132,8 +137,8 @@ public final class Helper {
         // https://www.geeksforgeeks.org/java/java-program-to-implement-shunting-yard-algorithm/
         // Evaluate the RPN expression
 
-        String rpn = infixToRpn(equation.replaceAll(" ", ""));
-        String[] rpnTokens = rpn.split("");
+        String rpn = infixToRpn(equation.split(" "));
+        String[] rpnTokens = rpn.split(" ");
         
         Stack<Double> stack = new Stack<>();
 

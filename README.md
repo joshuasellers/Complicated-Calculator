@@ -2,7 +2,6 @@
  A way to test out Java and improve my ability to create organized code.
 
 ## TODOs
-1. fix bug where one number is reduced to single digit
-2. generally test new algorithm
-3. Finalize calculator CX
-4. Use result tracking to not have all math in display at same time
+1. generally test new algorithm
+2. Finalize calculator CX
+3. Use result tracking to not have all math in display at same time

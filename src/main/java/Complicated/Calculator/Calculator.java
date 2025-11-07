@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
 import java.awt.Container;
+import java.util.List;
 
 public class Calculator {
     // Calculator logic will go here
@@ -19,6 +20,8 @@ public class Calculator {
     private JButton minusButton = new JButton("-"); 
     private JButton timesButton = new JButton("*");     
     private JButton divideButton = new JButton("/");
+    private JButton leftParenthesisButton = new JButton("(");
+    private JButton rightParenthesisButton = new JButton(")");  
     private JButton zeroButton = new JButton("0");
     private JButton oneButton = new JButton("1");
     private JButton twoButton = new JButton("2");
@@ -36,7 +39,7 @@ public class Calculator {
     private GridBagConstraints gbc;
     // Store current input and result
     private String currentInput = "";
-    private int currentResult = 0;
+    private double currentResult = 0;
 
     public Calculator(int width, int height, String title) {
         // Initialize the JFrame
@@ -76,6 +79,8 @@ public class Calculator {
         Helper.addobjects(sevenButton, container, layout, gbc, 4, 3, 1, 1);
         Helper.addobjects(eightButton, container, layout, gbc, 5, 0, 1, 1);
         Helper.addobjects(nineButton, container, layout, gbc, 5, 1, 1, 1);
+        Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 2, 1, 1);
+        Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -118,29 +123,11 @@ public class Calculator {
                 updateInput(" / ");
             }
         });
+        leftParenthesisButton.addActionListener(e -> updateInput(" ( "));
+        rightParenthesisButton.addActionListener(e -> updateInput(" ) "));  
         equalButton.addActionListener(e -> {
             String equation = displayLabel.getText();
-            String[] parts = equation.split(" ");
-            int result = 0;
-            for (int i = 0; i < parts.length; i++) {
-                String part = parts[i];
-                if (part.equals("+") || part.equals("-") || part.equals("*") || part.equals("/")) {
-                    if(part.equals("+") && i + 1 < parts.length) {
-                        result += Integer.parseInt(parts[++i].trim());
-                    } else if(part.equals("-") && i + 1 < parts.length) {
-                        result -= Integer.parseInt(parts[++i].trim());
-                    } else if(part.equals("*") && i + 1 < parts.length) {
-                        result *= Integer.parseInt(parts[++i].trim());
-                    } else if(part.equals("/") && i + 1 < parts.length) {
-                        result /= Integer.parseInt(parts[++i].trim());
-                    }
-                } else {
-                    if (i == 0) {
-                        result = Integer.parseInt(part.trim());
-                    }
-                    continue;
-                }
-            }
+            double result = Helper.evaluateRpn(equation);
             displayLabel.setText(String.valueOf(result));
             currentInput = String.valueOf(result);
             currentResult = result;

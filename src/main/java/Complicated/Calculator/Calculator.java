@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class Calculator {
     // Calculator logic will go here
@@ -59,27 +61,63 @@ public class Calculator {
         gbc = new GridBagConstraints();
         layout = new GridBagLayout();
         container.setLayout(layout);
+        // Set colors
+        container.setBackground(new Color(66, 155, 245));
+        displayLabel.setBackground(Color.WHITE);
+        displayLabel.setOpaque(true);
+        displayLabel.setHorizontalAlignment(JLabel.RIGHT);
+        displayLabel.setForeground(Color.BLACK);
+        displayLabel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK));
+        displayLabel.setMinimumSize(new Dimension(500, 50));
+        displayLabel.setPreferredSize(new Dimension(500, 50));
+        // Set font sizes
+        displayLabel.setFont(displayLabel.getFont().deriveFont(24f));
+        clearButton.setFont(clearButton.getFont().deriveFont(18f));
+        equalButton.setFont(equalButton.getFont().deriveFont(18f));
+        plussButton.setFont(plussButton.getFont().deriveFont(18f));
+        minusButton.setFont(minusButton.getFont().deriveFont(18f));
+        timesButton.setFont(timesButton.getFont().deriveFont(18f));
+        divideButton.setFont(divideButton.getFont().deriveFont(18f));
+        powerButton.setFont(powerButton.getFont().deriveFont(18f));
+        leftParenthesisButton.setFont(leftParenthesisButton.getFont().deriveFont(18f));
+        rightParenthesisButton.setFont(rightParenthesisButton.getFont().deriveFont(18f));
+        zeroButton.setFont(zeroButton.getFont().deriveFont(18f));
+        oneButton.setFont(oneButton.getFont().deriveFont(18f));
+        twoButton.setFont(twoButton.getFont().deriveFont(18f));
+        threeButton.setFont(threeButton.getFont().deriveFont(18f));
+        fourButton.setFont(fourButton.getFont().deriveFont(18f));
+        fiveButton.setFont(fiveButton.getFont().deriveFont(18f));
+        sixButton.setFont(sixButton.getFont().deriveFont(18f));
+        sevenButton.setFont(sevenButton.getFont().deriveFont(18f));
+        eightButton.setFont(eightButton.getFont().deriveFont(18f));
+        nineButton.setFont(nineButton.getFont().deriveFont(18f));
         // add components to the container using GridBagLayout
-        Helper.addobjects(displayLabel, container, layout, gbc, 0, 0, 1, 1);
+        // Make the display label take the entire top row (span all columns)
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
+        Helper.addobjects(displayLabel, container, layout, gbc, 0, 0, 6, 1);
+        // Reset fill/weight for the rest of the components so they size normally
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0.0;
         Helper.addobjects(clearButton, container, layout, gbc, 0, 2, 1, 1);
         Helper.addobjects(equalButton, container, layout, gbc, 0, 3, 1, 1);
-        Helper.addobjects(plussButton, container, layout, gbc, 2, 0, 1, 1);
-        Helper.addobjects(minusButton, container, layout, gbc, 2, 1, 1, 1);
-        Helper.addobjects(timesButton, container, layout, gbc, 2, 2, 1, 1);
-        Helper.addobjects(divideButton, container, layout, gbc, 2, 3, 1, 1);
-        Helper.addobjects(powerButton, container, layout, gbc, 1, 0, 1, 1);
-        Helper.addobjects(zeroButton, container, layout, gbc, 3, 0, 1, 1);
-        Helper.addobjects(oneButton, container, layout, gbc, 3, 1, 1, 1);
-        Helper.addobjects(twoButton, container, layout, gbc, 3, 2, 1, 1);
-        Helper.addobjects(threeButton, container, layout, gbc, 3, 3, 1, 1);
-        Helper.addobjects(fourButton, container, layout, gbc, 4, 0, 1, 1);
-        Helper.addobjects(fiveButton, container, layout, gbc, 4, 1, 1, 1);
-        Helper.addobjects(sixButton, container, layout, gbc, 4, 2, 1, 1);
-        Helper.addobjects(sevenButton, container, layout, gbc, 4, 3, 1, 1);
-        Helper.addobjects(eightButton, container, layout, gbc, 5, 0, 1, 1);
-        Helper.addobjects(nineButton, container, layout, gbc, 5, 1, 1, 1);
-        Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 2, 1, 1);
-        Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
+        Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
+        Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
+        Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);
+        Helper.addobjects(divideButton, container, layout, gbc, 2, 4, 1, 1);
+        Helper.addobjects(powerButton, container, layout, gbc, 1, 1, 1, 1);
+        Helper.addobjects(zeroButton, container, layout, gbc, 3, 1, 1, 1);
+        Helper.addobjects(oneButton, container, layout, gbc, 3, 2, 1, 1);
+        Helper.addobjects(twoButton, container, layout, gbc, 3, 3, 1, 1);
+        Helper.addobjects(threeButton, container, layout, gbc, 3, 4, 1, 1);
+        Helper.addobjects(fourButton, container, layout, gbc, 4, 1, 1, 1);
+        Helper.addobjects(fiveButton, container, layout, gbc, 4, 2, 1, 1);
+        Helper.addobjects(sixButton, container, layout, gbc, 4, 3, 1, 1);
+        Helper.addobjects(sevenButton, container, layout, gbc, 4, 4, 1, 1);
+        Helper.addobjects(eightButton, container, layout, gbc, 5, 1, 1, 1);
+        Helper.addobjects(nineButton, container, layout, gbc, 5, 2, 1, 1);
+        Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
+        Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 4, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -145,7 +183,6 @@ public class Calculator {
                 && !input.equals(" / ") && !input.equals(" ^ ")) {
             displayLabel.setText(input);
             currentInput = input;
-            System.out.println("Current Input: " + currentInput);
         } else if (currentInput.endsWith(")")) {
             return; // Prevent adding input directly after a closing parenthesis
         } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" 0"))){
@@ -153,7 +190,6 @@ public class Calculator {
         } else{
             displayLabel.setText(displayLabel.getText() + input);
             currentInput += input;
-            System.out.println("Current Input: " + currentInput);
         }
     }
 }

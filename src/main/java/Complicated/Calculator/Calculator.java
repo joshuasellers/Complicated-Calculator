@@ -1,9 +1,12 @@
 package Complicated.Calculator;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
@@ -33,6 +36,7 @@ public class Calculator {
     private JButton eightButton = new JButton("8");
     private JButton nineButton = new JButton("9");
     private JLabel displayLabel = new JLabel("0");
+    private JToggleButton advancedMathButton = new JToggleButton("Adv Math");
     // Layout components
     private JPanel container;
     private GridBagLayout layout;
@@ -118,6 +122,7 @@ public class Calculator {
         Helper.addobjects(nineButton, container, layout, gbc, 5, 2, 1, 1);
         Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
         Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 4, 1, 1);
+        Helper.addobjects(advancedMathButton, container, layout, gbc, 1, 4, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -168,6 +173,23 @@ public class Calculator {
         });
         leftParenthesisButton.addActionListener(e -> updateInput(" ( "));
         rightParenthesisButton.addActionListener(e -> updateInput(" ) "));  
+        advancedMathButton.addActionListener(e -> {
+            // Toggle advanced math mode (functionality to be implemented)
+            if (advancedMathButton.isSelected()) {
+                advancedMathButton.setText("Adv Math On");
+                // remove basic operations
+                container.remove(minusButton);
+                container.remove(plussButton);
+                container.remove(timesButton);
+                container.remove(divideButton);
+            } else {
+                advancedMathButton.setText("Adv Math");
+                Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
+                Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
+                Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);
+                Helper.addobjects(divideButton, container, layout, gbc, 2, 4, 1, 1);
+            }
+        });
         equalButton.addActionListener(e -> {
             String equation = displayLabel.getText();
             double result = Helper.evaluateRpn(equation);

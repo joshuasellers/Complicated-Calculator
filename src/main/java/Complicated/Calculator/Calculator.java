@@ -1,6 +1,7 @@
 package Complicated.Calculator;
 
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +16,7 @@ import java.awt.Dimension;
 public class Calculator {
     // Calculator logic will go here
     private JFrame calculator;
-    // UI components
+    // Basic calculator buttons
     private JButton clearButton = new JButton("Clear");
     private JButton equalButton = new JButton("=");
     private JButton plussButton = new JButton("+");
@@ -36,7 +37,16 @@ public class Calculator {
     private JButton eightButton = new JButton("8");
     private JButton nineButton = new JButton("9");
     private JLabel displayLabel = new JLabel("0");
-    private JToggleButton advancedMathButton = new JToggleButton("Adv Math");
+    // Advanced math toggle button with icons
+    ImageIcon onIcon = new ImageIcon("/Users/joshuasellers/Dropbox/github/Complicated Calculator/Complicated-Calculator/src/main/java/Complicated/Calculator/icons/advOn.png"); 
+    Image onImage = onIcon.getImage();
+    Image scaledOnImage = onImage.getScaledInstance(60, 20, Image.SCALE_SMOOTH);
+    ImageIcon scaledOnImageIcon = new ImageIcon(scaledOnImage);
+    ImageIcon offIcon = new ImageIcon("/Users/joshuasellers/Dropbox/github/Complicated Calculator/Complicated-Calculator/src/main/java/Complicated/Calculator/icons/advOff.png"); 
+    Image offImage = offIcon.getImage(); 
+    Image scaledOffImage = offImage.getScaledInstance(60, 20, Image.SCALE_SMOOTH);
+    ImageIcon scaledOffImageIcon = new ImageIcon(scaledOffImage);
+    private JToggleButton advancedMathButton = new JToggleButton(scaledOffImageIcon);
     // Layout components
     private JPanel container;
     private GridBagLayout layout;
@@ -176,14 +186,16 @@ public class Calculator {
         advancedMathButton.addActionListener(e -> {
             // Toggle advanced math mode (functionality to be implemented)
             if (advancedMathButton.isSelected()) {
-                advancedMathButton.setText("Adv Math On");
+                advancedMathButton.setIcon(scaledOnImageIcon);
                 // remove basic operations
+                System.out.println("Advanced math mode ON");
                 container.remove(minusButton);
                 container.remove(plussButton);
                 container.remove(timesButton);
                 container.remove(divideButton);
             } else {
-                advancedMathButton.setText("Adv Math");
+                advancedMathButton.setIcon(scaledOffImageIcon);
+                System.out.println("Advanced math mode OFF");
                 Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
                 Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
                 Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);

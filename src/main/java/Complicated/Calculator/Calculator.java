@@ -118,6 +118,7 @@ public class Calculator {
         // Reset fill/weight for the rest of the components so they size normally
         gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 0.0;
+        Helper.addobjects(advancedMathButton, container, layout, gbc, 0, 1, 1, 1);
         Helper.addobjects(clearButton, container, layout, gbc, 0, 2, 1, 1);
         Helper.addobjects(equalButton, container, layout, gbc, 0, 3, 1, 1);
         Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
@@ -137,7 +138,6 @@ public class Calculator {
         Helper.addobjects(nineButton, container, layout, gbc, 5, 2, 1, 1);
         Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
         Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 4, 1, 1);
-        Helper.addobjects(advancedMathButton, container, layout, gbc, 1, 4, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener

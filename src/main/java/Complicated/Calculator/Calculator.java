@@ -37,6 +37,11 @@ public class Calculator {
     private JButton eightButton = new JButton("8");
     private JButton nineButton = new JButton("9");
     private JLabel displayLabel = new JLabel("0");
+    // Advanced math buttons
+    private JButton sinButton = new JButton("sin");
+    private JButton cosButton = new JButton("cos");
+    private JButton tanButton = new JButton("tan");
+    private JButton logButton = new JButton("log");
     // Advanced math toggle button with icons
     ImageIcon onIcon = new ImageIcon("/Users/joshuasellers/Dropbox/github/Complicated Calculator/Complicated-Calculator/src/main/java/Complicated/Calculator/icons/advOn.png"); 
     Image onImage = onIcon.getImage();
@@ -193,13 +198,25 @@ public class Calculator {
                 container.remove(plussButton);
                 container.remove(timesButton);
                 container.remove(divideButton);
+                Helper.addobjects(sinButton, container, layout, gbc, 2, 1, 1, 1);
+                Helper.addobjects(cosButton, container, layout, gbc, 2, 2, 1, 1);
+                Helper.addobjects(tanButton, container, layout, gbc, 2, 3, 1, 1);
+                Helper.addobjects(logButton, container, layout, gbc, 2, 4, 1, 1);
+                container.revalidate();
+                container.repaint();
             } else {
                 advancedMathButton.setIcon(scaledOffImageIcon);
                 System.out.println("Advanced math mode OFF");
+                container.remove(sinButton);
+                container.remove(cosButton);
+                container.remove(tanButton);
+                container.remove(logButton);
                 Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
                 Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
                 Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);
                 Helper.addobjects(divideButton, container, layout, gbc, 2, 4, 1, 1);
+                container.revalidate();
+                container.repaint();
             }
         });
         equalButton.addActionListener(e -> {

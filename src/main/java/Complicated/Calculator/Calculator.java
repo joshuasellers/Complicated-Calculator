@@ -186,6 +186,11 @@ public class Calculator {
                 updateInput(" ^ ");
             }
         });
+        // TODO : add logic for adv math buttons (doesn't work rn)
+        sinButton.addActionListener(e -> updateInput(" sin( "));
+        cosButton.addActionListener(e -> updateInput(" cos( "));
+        tanButton.addActionListener(e -> updateInput(" tan( "));
+        logButton.addActionListener(e -> updateInput(" log( "));
         leftParenthesisButton.addActionListener(e -> updateInput(" ( "));
         rightParenthesisButton.addActionListener(e -> updateInput(" ) "));  
         advancedMathButton.addActionListener(e -> {

@@ -3,4 +3,4 @@
 
 ## TODOs
 1. Use result tracking to not have all math in display at same time
-2. add toggle to do advanced math
+2. add logic for adv math buttons (doesn't work rn)

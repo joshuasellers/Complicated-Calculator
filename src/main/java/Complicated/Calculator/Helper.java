@@ -133,11 +133,23 @@ public final class Helper {
         return output;
     }
 
+    public static String cleanUpAdvancedMath(String equation) {
+        // Replace advanced math functions with their equivalent expressions
+        String eqn = equation;
+        eqn = eqn.replaceAll("sin\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for sin
+        eqn = eqn.replaceAll("cos\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for cos
+        eqn = eqn.replaceAll("tan\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for tan
+        eqn = eqn.replaceAll("log\\s*\\(\\s*([^)]+)\\s*\\)", " ( ln ( $1 ) ) "); // Placeholder for log
+        return eqn;
+    }
+
     public static double evaluateRpn(String equation) {
         // https://www.geeksforgeeks.org/java/java-program-to-implement-shunting-yard-algorithm/
         // Evaluate the RPN expression
 
-        String rpn = infixToRpn(equation.split(" "));
+        String eqn = cleanUpAdvancedMath(equation);
+
+        String rpn = infixToRpn(eqn.split(" "));
         String[] rpnTokens = rpn.split(" ");
         
         Stack<Double> stack = new Stack<>();

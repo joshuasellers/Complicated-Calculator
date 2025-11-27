@@ -153,7 +153,7 @@ public final class Helper {
                 double operand1 = stack.pop();
                 if (token.equals("sin") || token.equals("cos") || token.equals("tan") || token.equals("log")) {
                     // For unary operators, only one operand is needed
-                    System.out.println("Applying unary operator: " + token + " to " + operand2);
+                    System.out.println("Applying unary operator: " + token + " to " + operand1);
                     switch (token) {
                         case "sin":
                             stack.push(Math.sin(operand1));

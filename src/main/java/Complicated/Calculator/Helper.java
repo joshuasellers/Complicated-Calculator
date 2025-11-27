@@ -82,6 +82,7 @@ public final class Helper {
             // If the scanned Token is an
             // operand, add it to output
             if (isOperand(s)) {
+                System.out.println("Adding operand to output: " + s);
                 output += s;
                 output += " ";
             }
@@ -90,12 +91,14 @@ public final class Helper {
             // push it to the stack
             else if (s.equals("(")) {
                 stack.push(s);
+                System.out.println("Pushing '(' to stack");
             }
 
             // If the scanned Token is an ')' pop and append
             // it to output from the stack until an '(' is
             // encountered
             else if (s.equals(")")) {
+                System.out.println("Encountered ')', popping until '('");
                 while (!stack.isEmpty()
                        && !stack.peek().equals("(")) {
                     output += stack.pop();
@@ -116,11 +119,16 @@ public final class Helper {
                     && hasLeftAssociativity(s)) {
                     // peek() inbuilt stack function to
                     // fetch the top element(token)
+                    System.out
+                        .println("Popping from stack to output: " + stack.peek());
 
                     output += stack.pop();
                     output += " ";
                 }
+                System.out
+                    .println("Pushing operator to stack: " + s);
                 stack.push(s);
+                System.out.println("Stack now: " + stack);
             }
         }
 
@@ -129,6 +137,8 @@ public final class Helper {
         while (!stack.isEmpty()) {
             if (stack.peek().equals("("))
                 return "This expression is invalid";
+            System.out
+                .println("Popping remaining from stack to output: " + stack.peek());
             output += stack.pop();
             output += " ";
         }
@@ -139,6 +149,7 @@ public final class Helper {
         // https://www.geeksforgeeks.org/java/java-program-to-implement-shunting-yard-algorithm/
         // Evaluate the RPN expression
 
+        System.out.println("Evaluating equation: " + equation);
         String rpn = infixToRpn(equation.split(" "));
         System.out.println("RPN: " + rpn);
         String[] rpnTokens = rpn.split(" ");

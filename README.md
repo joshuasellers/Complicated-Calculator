@@ -33,5 +33,3 @@
 	- Add a scientific mode toggle that expands/collapses advanced functions
 	- Add theme support (light/dark) and persistent user preferences
 	- Add copy/paste support for results
-
-If you'd like, I can commit these README changes and/or open follow-up issues for each feature so they can be tracked independently.

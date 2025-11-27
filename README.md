@@ -4,3 +4,34 @@
 ## TODOs
 1. Use result tracking to not have all math in display at same time
 2. add logic for adv math buttons (doesn't work rn)
+3. Improve UI/UX
+	- Make the display responsive to window resizing (use weightx/weighty and appropriate GridBagConstraints)
+	- Add keyboard input support (map number keys, enter for equals, backspace for delete)
+	- Add a clear/backspace button distinction and long-press clear-to-reset
+4. Add advanced math features
+	- Trigonometric functions (sin, cos, tan) with degree/radian toggle
+	- Log / ln, factorial, square root, nth root
+	- Support for constants (pi, e)
+	- Implement history of calculations and recall previous results
+5. Improve expression handling
+	- Allow negative numbers and unary minus handling robustly
+	- Support decimal input & proper formatting (prevent multiple decimals in a number)
+	- Improve parentheses handling and show mismatched-parenthesis warnings
+6. Reliability & validation
+	- Add input validation and user-friendly error messages for divide-by-zero and malformed expressions
+	- Add unit tests for the expression parser/evaluator (Helper class)
+7. Developer tooling
+	- Add CI (GitHub Actions) to run tests on push and PRs
+	- Add code style/linting (Spotless / Checkstyle) and configure Gradle tasks
+8. Packaging & distribution
+	- Provide a runnable JAR with a proper main class and a small launcher script
+	- Create native installers using jpackage for macOS/Windows/Linux
+9. Accessibility & Internationalization
+	- Add support for high-contrast mode and larger fonts
+	- Externalize strings for i18n and add translations (en + one other)
+10. Nice-to-haves
+	- Add a scientific mode toggle that expands/collapses advanced functions
+	- Add theme support (light/dark) and persistent user preferences
+	- Add copy/paste support for results
+
+If you'd like, I can commit these README changes and/or open follow-up issues for each feature so they can be tracked independently.

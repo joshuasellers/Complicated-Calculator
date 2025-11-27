@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Stack;
-import java.util.List;
 
 public final class Helper {
     private Helper() {
@@ -27,7 +26,7 @@ public final class Helper {
     }
 
     // Method is used to get the precedence of operators
-    private static boolean letterOrDigit(String s)
+    private static boolean stringOrDigit(String s)
     {
         // boolean check
         if (s.matches("-?\\d+(\\.\\d+)?"))
@@ -78,10 +77,11 @@ public final class Helper {
         for (int i = 0; i < expression.length; ++i) {
             // Finding character at 'i'th index
             String s = expression[i];
+            System.out.println("Token: " + s);
 
             // If the scanned Token is an
             // operand, add it to output
-            if (letterOrDigit(s)) {
+            if (stringOrDigit(s)) {
                 output += s;
                 output += " ";
             }
@@ -146,10 +146,30 @@ public final class Helper {
         Stack<Double> stack = new Stack<>();
 
         for (String token : rpnTokens) {
+            System.out.println("Evaluating token: " + token);
             if (token.matches("-?\\d+(\\.\\d+)?")) { // Check if it's a number
                 stack.push(Double.parseDouble(token));
             } else { // It's an operator
                 double operand2 = stack.pop();
+                if (token.equals("sin") || token.equals("cos") || token.equals("tan") || token.equals("log")) {
+                    // For unary operators, only one operand is needed
+                    switch (token) {
+                        case "sin":
+                            stack.push(Math.sin(operand2));
+                            break;
+                        case "cos":
+                            stack.push(Math.cos(operand2));
+                            break;
+                        case "tan":
+                            stack.push(Math.tan(operand2));
+                            break;
+                        case "log":
+                            stack.push(Math.log10(operand2));
+                            break;
+                    }
+                    continue; // Skip the rest of the loop
+                }
+                // For binary operators, pop the second operand
                 double operand1 = stack.pop();
                 switch (token) {
                     case "+":

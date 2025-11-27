@@ -150,28 +150,28 @@ public final class Helper {
             if (token.matches("-?\\d+(\\.\\d+)?")) { // Check if it's a number
                 stack.push(Double.parseDouble(token));
             } else { // It's an operator
-                double operand2 = stack.pop();
+                double operand1 = stack.pop();
                 if (token.equals("sin") || token.equals("cos") || token.equals("tan") || token.equals("log")) {
                     // For unary operators, only one operand is needed
                     System.out.println("Applying unary operator: " + token + " to " + operand2);
                     switch (token) {
                         case "sin":
-                            stack.push(Math.sin(operand2));
+                            stack.push(Math.sin(operand1));
                             break;
                         case "cos":
-                            stack.push(Math.cos(operand2));
+                            stack.push(Math.cos(operand1));
                             break;
                         case "tan":
-                            stack.push(Math.tan(operand2));
+                            stack.push(Math.tan(operand1));
                             break;
                         case "log":
-                            stack.push(Math.log10(operand2));
+                            stack.push(Math.log10(operand1));
                             break;
                     }
                     continue; // Skip the rest of the loop
                 }
                 // For binary operators, pop the second operand
-                double operand1 = stack.pop();
+                double operand2 = stack.pop();
                 System.out.println("Applying operator: " + token + " to " + operand1 + " and " + operand2);
                 switch (token) {
                     case "+":

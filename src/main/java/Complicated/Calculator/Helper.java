@@ -92,6 +92,7 @@ public final class Helper {
             else if (s.equals("(")) {
                 stack.push(s);
                 System.out.println("Pushing '(' to stack");
+                System.out.println("Stack now: " + stack);
             }
 
             // If the scanned Token is an ')' pop and append

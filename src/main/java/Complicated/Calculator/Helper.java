@@ -47,6 +47,8 @@ public final class Helper {
             return 2;
         else if (s.equals("^"))
             return 3;
+        else if (s.equals("sin") || s.equals("cos") || s.equals("tan") || s.equals("log"))
+            return 4;
         else
             return -1;
     }
@@ -133,23 +135,12 @@ public final class Helper {
         return output;
     }
 
-    public static String cleanUpAdvancedMath(String equation) {
-        // Replace advanced math functions with their equivalent expressions
-        String eqn = equation;
-        eqn = eqn.replaceAll("sin\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for sin
-        eqn = eqn.replaceAll("cos\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for cos
-        eqn = eqn.replaceAll("tan\\s*\\(\\s*([^)]+)\\s*\\)", " ( ( $1 ) ^ ( 1 / 2 ) ) "); // Placeholder for tan
-        eqn = eqn.replaceAll("log\\s*\\(\\s*([^)]+)\\s*\\)", " ( ln ( $1 ) ) "); // Placeholder for log
-        return eqn;
-    }
-
     public static double evaluateRpn(String equation) {
         // https://www.geeksforgeeks.org/java/java-program-to-implement-shunting-yard-algorithm/
         // Evaluate the RPN expression
 
-        String eqn = cleanUpAdvancedMath(equation);
-
-        String rpn = infixToRpn(eqn.split(" "));
+        String rpn = infixToRpn(equation.split(" "));
+        System.out.println("RPN: " + rpn);
         String[] rpnTokens = rpn.split(" ");
         
         Stack<Double> stack = new Stack<>();

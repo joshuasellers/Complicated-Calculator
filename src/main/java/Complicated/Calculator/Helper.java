@@ -26,7 +26,7 @@ public final class Helper {
     }
 
     // Method is used to get the precedence of operators
-    private static boolean stringOrDigit(String s)
+    private static boolean isOperand(String s)
     {
         // boolean check
         if (s.matches("-?\\d+(\\.\\d+)?"))
@@ -81,7 +81,7 @@ public final class Helper {
 
             // If the scanned Token is an
             // operand, add it to output
-            if (stringOrDigit(s)) {
+            if (isOperand(s)) {
                 output += s;
                 output += " ";
             }

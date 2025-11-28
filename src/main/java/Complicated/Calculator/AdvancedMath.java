@@ -51,7 +51,7 @@ public class AdvancedMath {
         System.out.println("sin(" + val + ") approximated as: " + output);
         // Get lagrange error estimate
         // Estimate the maximum value of the n+1 derivative of sin(x) over the interval
-        if (val > Math.PI / 2 || val < -Math.PI / 2) {
+        if (val >= Math.PI / 2 || val <= -Math.PI / 2) {
             // since sin(x) and its derivatives are bounded by 1 in this range
             Double M = 1.0;
             System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
@@ -77,6 +77,12 @@ public class AdvancedMath {
             double term = Math.pow(-1, n) * Math.pow(val, 2 * n) / factorial(2 * n);
             output += term; 
         }
+        System.out.println("cos(" + val + ") approximated as: " + output);
+        // Get lagrange error estimate
+        // Estimate the maximum value of the n+1 derivative of cos(x) over the interval
+        // since cos(x) has a maximum absolute value of 1 for all x at this derivative level
+        Double M = 1.0;
+        System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
         return output;
     }
 

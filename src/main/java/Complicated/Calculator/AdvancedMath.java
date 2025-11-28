@@ -21,18 +21,17 @@ public class AdvancedMath {
     private static double goldenSectionSearch(double a, double b, double tol) {
         // Golden-section search to find maximum of f(x) in [a, b]
         double phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-        double resphi = 2 - phi;
 
-        double c = b - resphi * (b - a);
-        double d = a + resphi * (b - a);
+        double c = b - (b - a) / phi;
+        double d = a + (b - a) / phi;
         while (Math.abs(c - d) > tol) {
             if (Math.abs(Math.sin(c)) < Math.abs(Math.sin(d))) {
                 b = d;
             } else {
                 a = c;
             }
-            c = b - resphi * (b - a);
-            d = a + resphi * (b - a);
+            c = b - (b - a) / phi;
+            d = a + (b - a) / phi;
         }
         System.out.println("Maximum f(x) in range: [" + a + ", " + b + "] is approximately at x = " + (a + b) / 2);
         return (a + b) / 2;

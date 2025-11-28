@@ -1,6 +1,8 @@
 package Complicated.Calculator;
 
 public class AdvancedMath {
+    private static final int TAYLOR_TERMS = 10;
+
     private AdvancedMath() {
         // private constructor to prevent instantiation
     }
@@ -42,26 +44,30 @@ public class AdvancedMath {
 
     public static double sin(double val) {
         double output = 0;
-        for (int n = 0; n < 10; n++) {
+        for (int n = 0; n < TAYLOR_TERMS; n++) {
             double term = Math.pow(-1, n) * Math.pow(val, 2 * n + 1) / factorial(2 * n + 1);
             output += term;
         }
         System.out.println("sin(" + val + ") approximated as: " + output);
-        // Estimate the maximum value of the 11th derivative of sin(x) which is 1
+        // Get lagrange error estimate
+        // Estimate the maximum value of the n+1 derivative of sin(x) over the interval
         if (val > Math.PI / 2 || val < -Math.PI / 2) {
-            Double M = 1.0; // since sin(x) and its derivatives are bounded by 1
-            System.out.println("Estimated Lagrange error: " + lagrangeError(val, 10, M));
+            // since sin(x) and its derivatives are bounded by 1 in this range
+            Double M = 1.0;
+            System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
         }
         else{
+            // Use golden section search to find maximum of |sin(x)| in [0, |val|]
+            // Using abs(val) to cover negative inputs
             Double M = goldenSectionSearch(0, Math.abs(val), 0.0001);
-            System.out.println("Estimated Lagrange error: " + lagrangeError(val, 10, M));
+            System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
         }
         return output;
     }
 
     public static double cos(double val) {
         double output = 0;
-        for (int n = 0; n < 10; n++) {
+        for (int n = 0; n < TAYLOR_TERMS; n++) {
             double term = Math.pow(-1, n) * Math.pow(val, 2 * n) / factorial(2 * n);
             output += term; 
         }

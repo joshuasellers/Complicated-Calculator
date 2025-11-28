@@ -19,7 +19,7 @@ public class AdvancedMath {
     }
 
     private static double goldenSectionSearch(double a, double b, double tol) {
-        // Golden-section search to find maximum of |f(x)| in [a, b]
+        // Golden-section search to find maximum of f(x) in [a, b]
         double phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
         double resphi = 2 - phi;
 
@@ -60,7 +60,13 @@ public class AdvancedMath {
         else{
             // Use golden section search to find maximum of |sin(x)| in [0, |val|]
             // Using abs(val) to cover negative inputs
-            Double M = goldenSectionSearch(0, Math.abs(val), 0.0001);
+            Double M;
+            if (val < 0) {
+                M = goldenSectionSearch(val, 0, 0.0001);
+            }
+            else {
+                M = goldenSectionSearch(0, val, 0.0001);
+            }
             System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
         }
         return output;

@@ -34,6 +34,7 @@ public class AdvancedMath {
             c = b - resphi * (b - a);
             d = a + resphi * (b - a);
         }
+        System.out.println("Maximum f(x) in range: [" + a + ", " + b + "] is approximately at x = " + (a + b) / 2);
         return (a + b) / 2;
     }
     

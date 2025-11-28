@@ -168,16 +168,16 @@ public final class Helper {
                     System.out.println("Applying unary operator: " + token + " to " + operand1);
                     switch (token) {
                         case "sin":
-                            stack.push(Math.sin(operand1));
+                            stack.push(AdvancedMath.sin(operand1));
                             break;
                         case "cos":
-                            stack.push(Math.cos(operand1));
+                            stack.push(AdvancedMath.cos(operand1));
                             break;
                         case "tan":
-                            stack.push(Math.tan(operand1));
+                            stack.push(AdvancedMath.tan(operand1));
                             break;
                         case "log":
-                            stack.push(Math.log10(operand1));
+                            stack.push(AdvancedMath.log10(operand1));
                             break;
                     }
                     continue; // Skip the rest of the loop

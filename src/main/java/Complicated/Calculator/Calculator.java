@@ -194,7 +194,6 @@ public class Calculator {
         leftParenthesisButton.addActionListener(e -> updateInput(" ( "));
         rightParenthesisButton.addActionListener(e -> updateInput(" ) "));  
         advancedMathButton.addActionListener(e -> {
-            // Toggle advanced math mode (functionality to be implemented)
             if (advancedMathButton.isSelected()) {
                 advancedMathButton.setIcon(scaledOnImageIcon);
                 // remove basic operations

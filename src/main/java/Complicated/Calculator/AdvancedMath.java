@@ -87,7 +87,8 @@ public class AdvancedMath {
     }
 
     public static double tan(double val) {
-        return Math.tan(val);
+        // tan(x) = sin(x) / cos(x)
+        return sin(val) / cos(val);
     }
 
     public static double log10(double value) {

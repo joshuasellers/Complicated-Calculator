@@ -91,9 +91,9 @@ public class AdvancedMath {
         return sin(val) / cos(val);
     }
 
-    public static double log10(double value) {
+    public static double ln(double value) {
         if (value <= 0) {
-            throw new IllegalArgumentException("Logarithm undefined for non-positive values.");
+            throw new IllegalArgumentException("Natural logarithm undefined for non-positive values.");
         }
         return Math.log10(value);
     }

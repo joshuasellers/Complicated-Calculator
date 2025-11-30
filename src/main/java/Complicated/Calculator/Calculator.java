@@ -41,7 +41,7 @@ public class Calculator {
     private JButton sinButton = new JButton("sin");
     private JButton cosButton = new JButton("cos");
     private JButton tanButton = new JButton("tan");
-    private JButton logButton = new JButton("log");
+    private JButton lnButton = new JButton("ln");
     // Advanced math toggle button with icons
     ImageIcon onIcon = new ImageIcon("/Users/joshuasellers/Dropbox/github/Complicated Calculator/Complicated-Calculator/src/main/java/Complicated/Calculator/icons/advOn.png"); 
     Image onImage = onIcon.getImage();
@@ -190,7 +190,7 @@ public class Calculator {
         sinButton.addActionListener(e -> updateInput(" sin ( "));
         cosButton.addActionListener(e -> updateInput(" cos ( "));
         tanButton.addActionListener(e -> updateInput(" tan ( "));
-        logButton.addActionListener(e -> updateInput(" log ( "));
+        lnButton.addActionListener(e -> updateInput(" ln ( "));
         leftParenthesisButton.addActionListener(e -> updateInput(" ( "));
         rightParenthesisButton.addActionListener(e -> updateInput(" ) "));  
         advancedMathButton.addActionListener(e -> {
@@ -205,7 +205,7 @@ public class Calculator {
                 Helper.addobjects(sinButton, container, layout, gbc, 2, 1, 1, 1);
                 Helper.addobjects(cosButton, container, layout, gbc, 2, 2, 1, 1);
                 Helper.addobjects(tanButton, container, layout, gbc, 2, 3, 1, 1);
-                Helper.addobjects(logButton, container, layout, gbc, 2, 4, 1, 1);
+                Helper.addobjects(lnButton, container, layout, gbc, 2, 4, 1, 1);
                 container.revalidate();
                 container.repaint();
             } else {
@@ -214,7 +214,7 @@ public class Calculator {
                 container.remove(sinButton);
                 container.remove(cosButton);
                 container.remove(tanButton);
-                container.remove(logButton);
+                container.remove(lnButton);
                 Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
                 Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
                 Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);

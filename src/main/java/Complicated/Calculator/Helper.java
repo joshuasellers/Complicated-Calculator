@@ -46,7 +46,7 @@ public final class Helper {
             return 2;
         else if (s.equals("^"))
             return 3;
-        else if (s.equals("sin") || s.equals("cos") || s.equals("tan") || s.equals("log"))
+        else if (s.equals("sin") || s.equals("cos") || s.equals("tan") || s.equals("ln"))
             return 4;
         else
             return -1;
@@ -163,7 +163,7 @@ public final class Helper {
                 stack.push(Double.parseDouble(token));
             } else { // It's an operator
                 double operand1 = stack.pop();
-                if (token.equals("sin") || token.equals("cos") || token.equals("tan") || token.equals("log")) {
+                if (token.equals("sin") || token.equals("cos") || token.equals("tan") || token.equals("ln")) {
                     // For unary operators, only one operand is needed
                     System.out.println("Applying unary operator: " + token + " to " + operand1);
                     switch (token) {
@@ -176,8 +176,8 @@ public final class Helper {
                         case "tan":
                             stack.push(AdvancedMath.tan(operand1));
                             break;
-                        case "log":
-                            stack.push(AdvancedMath.log10(operand1));
+                        case "ln":
+                            stack.push(AdvancedMath.ln(operand1));
                             break;
                     }
                     continue; // Skip the rest of the loop

@@ -19,6 +19,7 @@ public class AdvancedMath {
     }
 
     private static double goldenSectionSearch(double a, double b, double tol) {
+        // TODO: make it work for sin, cos, tan, ln by passing function as parameter
         // Golden-section search to find maximum of f(x) in [a, b]
         double phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
 
@@ -81,8 +82,8 @@ public class AdvancedMath {
         // Get lagrange error estimate
         // Estimate the maximum value of the n+1 derivative of cos(x) over the interval
         // since cos(x) has a maximum absolute value of 1 for all x at this derivative level
-        Double M = 1.0;
-        System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
+        // Double M = 1.0;
+        // System.out.println("Estimated Lagrange error: " + lagrangeError(val, TAYLOR_TERMS, M));
         return output;
     }
 
@@ -92,10 +93,28 @@ public class AdvancedMath {
     }
 
     public static double ln(double value) {
+        // TODO: potential other implementation using this method https://www.quinapalus.com/efunc.html
         if (value <= 0) {
             throw new IllegalArgumentException("Natural logarithm undefined for non-positive values.");
         }
-        return Math.log10(value);
+        // Taylor series expansion around 1
+        // ln(x) = Σ (from n=1 to ∞) [(-1)^(n-1) * (x-1)^n / n] for 0 < x ≤ 2
+        int k = 0;
+        // Adjust value to be within (0, 2) using properties of logarithms
+        while (value >= 2) {
+            value = Math.sqrt(value); 
+            k++;
+        }
+        double power = (int) Math.pow(2, k); // Since we took k square roots
+        System.out.println("Adjusted value for ln calculation: " + value + ", with power factor: " + power);
+        double output = 0;
+        for (int n = 1; n < TAYLOR_TERMS; n++) {
+            double term = Math.pow(-1, n - 1) * Math.pow(value - 1, n) / n;
+            output += term;
+        }
+        System.out.println("ln(" + value + ") approximated as: " + output);
+        System.out.println("Multiplier applied: " + power);
+        return output * power; // ln(original value) = ln(adjusted value) * 2^k
     }
     
 }

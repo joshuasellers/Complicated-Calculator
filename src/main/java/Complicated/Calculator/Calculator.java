@@ -225,11 +225,30 @@ public class Calculator {
         });
         equalButton.addActionListener(e -> {
             String equation = displayLabel.getText();
+            equation = confirmMatchingParentheses(equation);
             double result = Helper.evaluateRpn(equation);
             displayLabel.setText(String.valueOf(result));
             currentInput = String.valueOf(result);
             currentResult = result;
         }); 
+    }
+
+    private String confirmMatchingParentheses(String equation) {
+        int openParens = 0;
+        int closeParens = 0;
+        for (char c : equation.toCharArray()) {
+            if (c == '(') {
+                openParens++;
+            } else if (c == ')') {
+                closeParens++;
+            }
+        }
+        StringBuilder updatedEquation = new StringBuilder(equation);
+        while (openParens > closeParens) {
+            updatedEquation.append(" )");
+            closeParens++;
+        }
+        return updatedEquation.toString();
     }
 
     private void updateInput(String input) {

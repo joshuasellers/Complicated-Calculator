@@ -12,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Calculator {
     // Calculator logic will go here
@@ -185,6 +187,80 @@ public class Calculator {
                 updateInput(" ^ ");
             }
         });
+
+        frame.addKeyListener(
+            new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    // Not used
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    char keyChar = e.getKeyChar();
+                    switch (keyChar) {
+                        case '0':
+                            zeroButton.doClick();
+                            break;
+                        case '1':
+                            oneButton.doClick();
+                            break;
+                        case '2':
+                            twoButton.doClick();
+                            break;
+                        case '3':
+                            threeButton.doClick();
+                            break;
+                        case '4':
+                            fourButton.doClick();
+                            break;
+                        case '5':
+                            fiveButton.doClick();
+                            break;
+                        case '6':
+                            sixButton.doClick();
+                            break;
+                        case '7':
+                            sevenButton.doClick();
+                            break;
+                        case '8':
+                            eightButton.doClick();
+                            break;
+                        case '9':
+                            nineButton.doClick();
+                            break;
+                        case '+':
+                            plussButton.doClick();
+                            break;
+                        case '-':
+                            minusButton.doClick();
+                            break;
+                        case '*':
+                            timesButton.doClick();
+                            break;
+                        case '/':
+                            divideButton.doClick();
+                            break;
+                        case '^':
+                            powerButton.doClick();
+                            break;
+                        case '=':
+                        case '\n':
+                            equalButton.doClick(); // Enter key
+                            break;
+                        case 'c':
+                        case 'C':
+                            clearButton.doClick();
+                            break;
+                    }
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    // Not used
+                }
+            }
+        );
 
         sinButton.addActionListener(e -> updateInput(" sin ( "));
         cosButton.addActionListener(e -> updateInput(" cos ( "));

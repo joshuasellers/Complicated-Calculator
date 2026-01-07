@@ -4,7 +4,6 @@
 ## TODOs
 - Use result tracking to not have all math in display at same time
 - Improve UI/UX
-	- Add keyboard input support (map number keys, enter for equals, backspace for delete)
 	- Add a clear/backspace button distinction and long-press clear-to-reset
 - Add advanced math features
 	- Trigonometric functions (sin, cos, tan) with degree/radian toggle

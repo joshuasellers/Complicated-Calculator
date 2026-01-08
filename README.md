@@ -25,6 +25,5 @@
 	- Add support for high-contrast mode and larger fonts
 	- Externalize strings for i18n and add translations (en + one other)
 - Nice-to-haves
-	- Add a scientific mode toggle that expands/collapses advanced functions
 	- Add theme support (light/dark) and persistent user preferences
 	- Add copy/paste support for results

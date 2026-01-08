@@ -187,7 +187,8 @@ public class Calculator {
                 updateInput(" ^ ");
             }
         });
-
+        // Key listener for keyboard input
+        frame.setFocusable(true);
         frame.addKeyListener(
             new KeyListener() {
                 @Override
@@ -252,7 +253,17 @@ public class Calculator {
                         case 'C':
                             clearButton.doClick();
                             break;
+                        case '(':
+                            leftParenthesisButton.doClick();
+                            break;
+                        case ')':
+                            rightParenthesisButton.doClick();
+                            break;
+                        case '\u001B': // Escape key
+                            frame.dispose();
+                            break;
                     }
+                    System.out.println("Key Pressed: " + keyChar);
                 }
 
                 @Override

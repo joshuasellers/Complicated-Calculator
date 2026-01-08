@@ -3,8 +3,6 @@
 
 ## TODOs
 - Use result tracking to not have all math in display at same time
-- Improve UI/UX
-	- Add a clear/backspace button distinction and long-press clear-to-reset
 - Add advanced math features
 	- Trigonometric functions (sin, cos, tan) with degree/radian toggle
 	- Log / ln, factorial, square root, nth root

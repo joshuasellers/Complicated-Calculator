@@ -1,4 +1,4 @@
-package Complicated.Calculator;
+package Complicated.Calculator.misc;
 
 import java.awt.Component;
 import java.awt.Container;

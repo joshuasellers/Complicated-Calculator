@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import Complicated.Calculator.misc.Helper;
+import Complicated.Calculator.misc.ImagePanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
@@ -53,6 +56,9 @@ public class Calculator {
     Image offImage = offIcon.getImage(); 
     Image scaledOffImage = offImage.getScaledInstance(60, 20, Image.SCALE_SMOOTH);
     ImageIcon scaledOffImageIcon = new ImageIcon(scaledOffImage);
+    ImageIcon backgroundIcon = new ImageIcon("/Users/joshuasellers/Dropbox/github/Complicated Calculator/Complicated-Calculator/src/main/java/Complicated/Calculator/icons/background.jpg");
+    Image backgroundImage = backgroundIcon.getImage();
+    Image scaledBackgroundImage = backgroundImage.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
     private JToggleButton advancedMathButton = new JToggleButton(scaledOffImageIcon);
     // Layout components
     private JPanel container;
@@ -78,12 +84,12 @@ public class Calculator {
     }
 
     private void populateCalculator(JFrame frame) {
-        container = new JPanel();
+        container = new ImagePanel(backgroundImage);
         gbc = new GridBagConstraints();
         layout = new GridBagLayout();
         container.setLayout(layout);
+        container.paintComponents(container.getGraphics());
         // Set colors
-        container.setBackground(new Color(66, 155, 245));
         displayLabel.setBackground(Color.WHITE);
         displayLabel.setOpaque(true);
         displayLabel.setHorizontalAlignment(JLabel.RIGHT);

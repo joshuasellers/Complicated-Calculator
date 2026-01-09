@@ -1,4 +1,4 @@
-package Complicated.Calculator;
+package Complicated.Calculator.misc;
 
 public class AdvancedMath {
     private static final int TAYLOR_TERMS = 10;

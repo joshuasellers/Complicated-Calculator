@@ -2,6 +2,8 @@
  A way to test out Java and improve my ability to create organized code.
 
 ## TODOs
+- confirm escape key works
+- confirm negative numbers work as expected
 - Use result tracking to not have all math in display at same time
 - Add advanced math features
 	- Trigonometric functions (sin, cos, tan) with degree/radian toggle
@@ -9,7 +11,6 @@
 	- Support for constants (pi, e)
 	- Implement history of calculations and recall previous results
 - Improve expression handling
-	- Allow negative numbers and unary minus handling robustly
 	- Support decimal input & proper formatting (prevent multiple decimals in a number)
 	- Improve parentheses handling and show mismatched-parenthesis warnings
 - Reliability & validation

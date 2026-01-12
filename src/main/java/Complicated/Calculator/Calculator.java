@@ -344,16 +344,44 @@ public class Calculator {
     }
 
     private void updateInput(String input) {
+        System.out.println("Current Input: " + currentInput);
+        System.out.println("Display Label: " + displayLabel.getText());
+        System.out.println("Input: " + input);
         if (displayLabel.getText().equals("0") && !input.equals(" + ") 
-                && !input.equals(" - ") && !input.equals(" * ") 
-                && !input.equals(" / ") && !input.equals(" ^ ")) {
+                && !input.equals(" * ") && !input.equals(" / ") 
+                && !input.equals(" ^ ")) {
+            System.out.println("Replacing initial 0 with input: " + input);
             displayLabel.setText(input);
             currentInput = input;
         } else if (currentInput.endsWith(")")) {
+            System.out.println("Input ends with closing parenthesis, cannot add more input directly.");
             return; // Prevent adding input directly after a closing parenthesis
         } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" 0"))){
+            System.out.println("Preventing leading zeros.");
             return; // Prevent leading zeros
+        } else if(input.equals(" + ") || input.equals(" - ") || input.equals(" * ") 
+                || input.equals(" / ") || input.equals(" ^ ")){
+            // Prevent adding operator if the last character is also an operator
+            if(displayLabel.getText().endsWith(" + ") || displayLabel.getText().endsWith(" - ") 
+                || displayLabel.getText().endsWith(" * ") || displayLabel.getText().endsWith(" / ") 
+                || displayLabel.getText().endsWith(" ^ ")){
+                System.out.println("Preventing consecutive operators.");
+                return;
+            }else{
+                System.out.println("Adding operator: " + input);
+                displayLabel.setText(displayLabel.getText() + input);
+                currentInput += input;
+            }
+        }else if((displayLabel.getText().strip().equals("-") || displayLabel.getText().endsWith("( - ")) && (input.equals("1") || input.equals("2")
+                || input.equals("3") || input.equals("4") || input.equals("5")
+                || input.equals("6") || input.equals("7") || input.equals("8")
+                || input.equals("9"))){
+            // Prevent adding space after negative sign before a number
+            System.out.println("Preventing space after negative sign before number.");
+            displayLabel.setText(displayLabel.getText().substring(0, displayLabel.getText().length() - 3) + "-" + input.trim());
+            currentInput = currentInput.substring(0, currentInput.length() - 3) + "-" + input.trim();
         } else{
+            System.out.println("No formatting needed. Adding input: " + input);
             displayLabel.setText(displayLabel.getText() + input);
             currentInput += input;
         }

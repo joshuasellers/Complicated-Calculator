@@ -2,7 +2,6 @@
  A way to test out Java and improve my ability to create organized code.
 
 ## TODOs
-- confirm escape key works
 - confirm negative numbers work as expected
 - Use result tracking to not have all math in display at same time
 - Add advanced math features

@@ -15,8 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.KeyStroke;
 
 public class Calculator {
     // Calculator logic will go here
@@ -193,91 +192,6 @@ public class Calculator {
                 updateInput(" ^ ");
             }
         });
-        // Key listener for keyboard input
-        frame.setFocusable(true);
-        frame.addKeyListener(
-            new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-                    // Not used
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    char keyChar = e.getKeyChar();
-                    switch (keyChar) {
-                        case '0':
-                            zeroButton.doClick();
-                            break;
-                        case '1':
-                            oneButton.doClick();
-                            break;
-                        case '2':
-                            twoButton.doClick();
-                            break;
-                        case '3':
-                            threeButton.doClick();
-                            break;
-                        case '4':
-                            fourButton.doClick();
-                            break;
-                        case '5':
-                            fiveButton.doClick();
-                            break;
-                        case '6':
-                            sixButton.doClick();
-                            break;
-                        case '7':
-                            sevenButton.doClick();
-                            break;
-                        case '8':
-                            eightButton.doClick();
-                            break;
-                        case '9':
-                            nineButton.doClick();
-                            break;
-                        case '+':
-                            plussButton.doClick();
-                            break;
-                        case '-':
-                            minusButton.doClick();
-                            break;
-                        case '*':
-                            timesButton.doClick();
-                            break;
-                        case '/':
-                            divideButton.doClick();
-                            break;
-                        case '^':
-                            powerButton.doClick();
-                            break;
-                        case '=':
-                        case '\n':
-                            equalButton.doClick(); // Enter key
-                            break;
-                        case 'c':
-                        case 'C':
-                            clearButton.doClick();
-                            break;
-                        case '(':
-                            leftParenthesisButton.doClick();
-                            break;
-                        case ')':
-                            rightParenthesisButton.doClick();
-                            break;
-                        case '\u001B': // Escape key
-                            frame.dispose();
-                            break;
-                    }
-                    System.out.println("Key Pressed: " + keyChar);
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    // Not used
-                }
-            }
-        );
 
         sinButton.addActionListener(e -> updateInput(" sin ( "));
         cosButton.addActionListener(e -> updateInput(" cos ( "));
@@ -323,6 +237,48 @@ public class Calculator {
             currentInput = String.valueOf(result);
             currentResult = result;
         }); 
+    
+        // add key listener for keyboard input
+        addKeyboardSupport(container);
+    }
+
+    private void addKeyboardSupport(JPanel container) {
+        for (char c = '0'; c <= '9'; c++) {
+            String actionName = String.valueOf(c);
+            KeyStroke key = KeyStroke.getKeyStroke(c);
+            container.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(key, actionName);
+            container.getActionMap().put(actionName, new javax.swing.AbstractAction() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    updateInput(actionName);
+                }
+            });
+        }
+        // Add key binding for Enter key to trigger equal button
+        KeyStroke enterKey = KeyStroke.getKeyStroke("ENTER");
+        container.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(enterKey, "EQUALS");
+        container.getActionMap().put("EQUALS", new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                String equation = displayLabel.getText();
+                equation = confirmMatchingParentheses(equation);
+                double result = Helper.evaluateRpn(equation);
+                displayLabel.setText(String.valueOf(result));
+                currentInput = String.valueOf(result);
+                currentResult = result;
+            }
+        });
+        // Add key binding for Escape key to trigger clear button
+        KeyStroke escapeKey = KeyStroke.getKeyStroke("ESCAPE");
+        container.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(escapeKey, "CLEAR");
+        container.getActionMap().put("CLEAR", new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                displayLabel.setText("0");
+                currentInput = "";
+                currentResult = 0;
+            }
+        });
     }
 
     private String confirmMatchingParentheses(String equation) {

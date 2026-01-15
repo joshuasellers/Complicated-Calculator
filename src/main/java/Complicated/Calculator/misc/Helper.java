@@ -187,23 +187,24 @@ public final class Helper {
                 System.out.println("Applying operator: " + token + " to " + operand1 + " and " + operand2);
                 switch (token) {
                     case "+":
-                        stack.push(operand1 + operand2);
+                        stack.push(operand2 + operand1);
                         break;
                     case "-":
-                        stack.push(operand1 - operand2);
+                        stack.push(operand2 - operand1);
                         break;
                     case "*":
-                        stack.push(operand1 * operand2);
+                        stack.push(operand2 * operand1);
                         break;
                     case "/":
-                        stack.push(operand1 / operand2);
+                        stack.push(operand2 / operand1);
                         break;
                     case "^":
-                        stack.push(Math.pow(operand1, operand2));
+                        stack.push(Math.pow(operand2, operand1));
                         break;
                 }
             }
         }
+        System.out.println("Final result: " + stack.peek());
         return stack.pop();
     }
 }

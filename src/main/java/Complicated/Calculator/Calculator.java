@@ -230,6 +230,7 @@ public class Calculator {
             }
         });
         equalButton.addActionListener(e -> {
+            System.out.println("Equal button pressed.");
             String equation = displayLabel.getText();
             equation = confirmMatchingParentheses(equation);
             double result = Helper.evaluateRpn(equation);
@@ -260,6 +261,7 @@ public class Calculator {
         container.getActionMap().put("EQUALS", new javax.swing.AbstractAction() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("Equal button pressed.");
                 String equation = displayLabel.getText();
                 equation = confirmMatchingParentheses(equation);
                 double result = Helper.evaluateRpn(equation);
@@ -306,10 +308,14 @@ public class Calculator {
         if (displayLabel.getText().equals("0") && !input.equals(" + ") 
                 && !input.equals(" * ") && !input.equals(" / ") 
                 && !input.equals(" ^ ")) {
+            // Handle initial zero case
             System.out.println("Replacing initial 0 with input: " + input);
             displayLabel.setText(input);
             currentInput = input;
-        } else if (currentInput.endsWith(")")) {
+        } else if (currentInput.endsWith(")") && (input.equals("1") || input.equals("2")
+                || input.equals("3") || input.equals("4") || input.equals("5")
+                || input.equals("6") || input.equals("7") || input.equals("8")
+                || input.equals("9") || input.equals("0") || input.equals(" ( "))) {
             System.out.println("Input ends with closing parenthesis, cannot add more input directly.");
             return; // Prevent adding input directly after a closing parenthesis
         } else if(input.equals("0") && (currentInput.equals("") || currentInput.endsWith(" 0"))){
@@ -328,7 +334,7 @@ public class Calculator {
                 displayLabel.setText(displayLabel.getText() + input);
                 currentInput += input;
             }
-        }else if((displayLabel.getText().strip().equals("-") || displayLabel.getText().endsWith("( - ")) && (input.equals("1") || input.equals("2")
+        }else if((displayLabel.getText().strip().equals("-") || displayLabel.getText().endsWith("(  - ")) && (input.equals("1") || input.equals("2")
                 || input.equals("3") || input.equals("4") || input.equals("5")
                 || input.equals("6") || input.equals("7") || input.equals("8")
                 || input.equals("9"))){
@@ -341,5 +347,8 @@ public class Calculator {
             displayLabel.setText(displayLabel.getText() + input);
             currentInput += input;
         }
+        currentInput = currentInput.replaceAll("\\s+", " ");
+        displayLabel.setText(currentInput);
+        System.out.println("Updated Current Input to remove extra spaces: " + currentInput);
     }
 }

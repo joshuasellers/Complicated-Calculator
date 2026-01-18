@@ -159,7 +159,8 @@ public final class Helper {
 
         for (String token : rpnTokens) {
             System.out.println("Evaluating token: " + token);
-            if (token.matches("-?\\d+(\\.\\d+)?")) { // Check if it's a number
+            if (token.matches("^-?\\d*\\.?\\d+$")) { // Check if it's a number
+                System.out.println("Pushing number to stack: " + token);
                 stack.push(Double.parseDouble(token));
             } else { // It's an operator
                 double operand1 = stack.pop();

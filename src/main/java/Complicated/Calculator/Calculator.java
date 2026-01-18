@@ -2,6 +2,8 @@ package Complicated.Calculator;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +18,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.KeyStroke;
+
+import org.checkerframework.checker.units.qual.A;
 
 public class Calculator {
     // Calculator logic will go here
@@ -40,6 +44,10 @@ public class Calculator {
     private JButton sevenButton = new JButton("7");
     private JButton eightButton = new JButton("8");
     private JButton nineButton = new JButton("9");
+    private JButton piButton = new JButton("π");
+    private JButton decimalButton = new JButton(".");
+    private JButton eButton = new JButton("e");
+    // Display label
     private JLabel displayLabel = new JLabel("0");
     // Advanced math buttons
     private JButton sinButton = new JButton("sin");
@@ -63,6 +71,12 @@ public class Calculator {
     private JPanel container;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
+    private JButton[] allButtons = {zeroButton, oneButton, twoButton, threeButton, fourButton,
+                                    fiveButton, sixButton, sevenButton, eightButton, nineButton,
+                                    plussButton, minusButton, timesButton, divideButton,
+                                    powerButton, leftParenthesisButton, rightParenthesisButton,
+                                    piButton, decimalButton, eButton, clearButton, equalButton, 
+                                    sinButton, cosButton, tanButton, lnButton};
     // Store current input and result
     private String currentInput = "";
     private double currentResult = 0;
@@ -98,25 +112,9 @@ public class Calculator {
         displayLabel.setPreferredSize(new Dimension(500, 50));
         // Set font sizes
         displayLabel.setFont(displayLabel.getFont().deriveFont(24f));
-        clearButton.setFont(clearButton.getFont().deriveFont(18f));
-        equalButton.setFont(equalButton.getFont().deriveFont(18f));
-        plussButton.setFont(plussButton.getFont().deriveFont(18f));
-        minusButton.setFont(minusButton.getFont().deriveFont(18f));
-        timesButton.setFont(timesButton.getFont().deriveFont(18f));
-        divideButton.setFont(divideButton.getFont().deriveFont(18f));
-        powerButton.setFont(powerButton.getFont().deriveFont(18f));
-        leftParenthesisButton.setFont(leftParenthesisButton.getFont().deriveFont(18f));
-        rightParenthesisButton.setFont(rightParenthesisButton.getFont().deriveFont(18f));
-        zeroButton.setFont(zeroButton.getFont().deriveFont(18f));
-        oneButton.setFont(oneButton.getFont().deriveFont(18f));
-        twoButton.setFont(twoButton.getFont().deriveFont(18f));
-        threeButton.setFont(threeButton.getFont().deriveFont(18f));
-        fourButton.setFont(fourButton.getFont().deriveFont(18f));
-        fiveButton.setFont(fiveButton.getFont().deriveFont(18f));
-        sixButton.setFont(sixButton.getFont().deriveFont(18f));
-        sevenButton.setFont(sevenButton.getFont().deriveFont(18f));
-        eightButton.setFont(eightButton.getFont().deriveFont(18f));
-        nineButton.setFont(nineButton.getFont().deriveFont(18f));
+        for (JButton button : allButtons) {
+            button.setFont(button.getFont().deriveFont(18f));
+        }
         // add components to the container using GridBagLayout
         // Make the display label take the entire top row (span all columns)
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -144,6 +142,9 @@ public class Calculator {
         Helper.addobjects(nineButton, container, layout, gbc, 5, 2, 1, 1);
         Helper.addobjects(leftParenthesisButton, container, layout, gbc, 5, 3, 1, 1);
         Helper.addobjects(rightParenthesisButton, container, layout, gbc, 5, 4, 1, 1);
+        Helper.addobjects(piButton, container, layout, gbc, 1, 2, 1, 1);
+        Helper.addobjects(decimalButton, container, layout, gbc, 1, 3, 1, 1);
+        Helper.addobjects(eButton, container, layout, gbc, 1, 4, 1, 1);
         // add container to frame
         frame.add(container);
         // add button action listener
@@ -162,6 +163,13 @@ public class Calculator {
         sevenButton.addActionListener(e -> updateInput("7"));
         eightButton.addActionListener(e -> updateInput("8"));
         nineButton.addActionListener(e -> updateInput("9"));
+        decimalButton.addActionListener(e -> {
+            if (!displayLabel.getText().endsWith(".")) {
+                updateInput(".");
+            }
+        });
+        piButton.addActionListener(e -> updateInput(" " + Math.PI + " "));
+        eButton.addActionListener(e -> updateInput(" " + Math.E + " "));    
         plussButton.addActionListener(e -> {
             if (!displayLabel.getText().endsWith("+ ") && !displayLabel.getText().endsWith("- ") &&
                 !displayLabel.getText().endsWith("* ") && !displayLabel.getText().endsWith("/ ")) {
@@ -342,7 +350,19 @@ public class Calculator {
             System.out.println("Preventing space after negative sign before number.");
             displayLabel.setText(displayLabel.getText().substring(0, displayLabel.getText().length() - 3) + "-" + input.trim());
             currentInput = currentInput.substring(0, currentInput.length() - 3) + "-" + input.trim();
-        } else{
+        } else if(input.equals(".")) {
+            // Prevent multiple decimals in a number
+            String[] tokens = currentInput.split(" ");
+            String lastToken = tokens[tokens.length - 1];
+            if (lastToken.contains(".")) {
+                System.out.println("Preventing multiple decimals in a number.");
+                return;
+            } else {
+                System.out.println("Adding decimal point: " + input);
+                displayLabel.setText(displayLabel.getText() + input);
+                currentInput += input;
+            }
+        }else{
             System.out.println("No formatting needed. Adding input: " + input);
             displayLabel.setText(displayLabel.getText() + input);
             currentInput += input;

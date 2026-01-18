@@ -2,7 +2,6 @@
  A way to test out Java and improve my ability to create organized code.
 
 ## TODOs
-- Use result tracking to not have all math in display at same time
 - Add advanced math features
 	- Trigonometric functions (sin, cos, tan) with degree/radian toggle
 	- Log / ln, factorial, square root, nth root

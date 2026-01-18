@@ -5,11 +5,10 @@
 - Add advanced math features
 	- Trigonometric functions (sin, cos, tan) with degree/radian toggle
 	- Log / ln, factorial, square root, nth root
-	- Support for constants (pi, e)
 	- Implement history of calculations and recall previous results
 - Improve expression handling
-	- Support decimal input & proper formatting (prevent multiple decimals in a number)
 	- Improve parentheses handling and show mismatched-parenthesis warnings
+	- handle general warnings too
 - Reliability & validation
 	- Add input validation and user-friendly error messages for divide-by-zero and malformed expressions
 	- Add unit tests for the expression parser/evaluator (Helper class)

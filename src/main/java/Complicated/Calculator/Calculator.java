@@ -2,7 +2,6 @@ package Complicated.Calculator;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +18,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.KeyStroke;
 
-import org.checkerframework.checker.units.qual.A;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 
 public class Calculator {
     // Calculator logic will go here
@@ -67,6 +68,8 @@ public class Calculator {
     Image backgroundImage = backgroundIcon.getImage();
     Image scaledBackgroundImage = backgroundImage.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
     private JToggleButton advancedMathButton = new JToggleButton(scaledOffImageIcon);
+    // Copy button
+    private JButton copyButton = new JButton("Copy Result");
     // Layout components
     private JPanel container;
     private GridBagLayout layout;
@@ -75,8 +78,8 @@ public class Calculator {
                                     fiveButton, sixButton, sevenButton, eightButton, nineButton,
                                     plussButton, minusButton, timesButton, divideButton,
                                     powerButton, leftParenthesisButton, rightParenthesisButton,
-                                    piButton, decimalButton, eButton, clearButton, equalButton, 
-                                    sinButton, cosButton, tanButton, lnButton};
+                                    piButton, decimalButton, eButton, clearButton, equalButton,
+                                    sinButton, cosButton, tanButton, lnButton, copyButton};
     // Store current input and result
     private String currentInput = "";
     private double currentResult = 0;
@@ -125,6 +128,7 @@ public class Calculator {
         Helper.addobjects(advancedMathButton, container, layout, gbc, 0, 1, 1, 1);
         Helper.addobjects(clearButton, container, layout, gbc, 0, 2, 1, 1);
         Helper.addobjects(equalButton, container, layout, gbc, 0, 3, 1, 1);
+        Helper.addobjects(copyButton, container, layout, gbc, 0, 4, 1, 1);
         Helper.addobjects(plussButton, container, layout, gbc, 2, 1, 1, 1);
         Helper.addobjects(minusButton, container, layout, gbc, 2, 2, 1, 1);
         Helper.addobjects(timesButton, container, layout, gbc, 2, 3, 1, 1);
@@ -152,6 +156,11 @@ public class Calculator {
             displayLabel.setText("0");
             currentInput = "";
             currentResult = 0;
+        });
+        copyButton.addActionListener(e -> {
+            StringSelection stringSelection = new StringSelection(String.valueOf(displayLabel.getText()));
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
         });
         zeroButton.addActionListener(e -> updateInput("0"));
         oneButton.addActionListener(e -> updateInput("1"));

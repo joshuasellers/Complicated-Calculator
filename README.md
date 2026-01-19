@@ -23,4 +23,3 @@
 	- Externalize strings for i18n and add translations (en + one other)
 - Nice-to-haves
 	- Add theme support (light/dark) and persistent user preferences
-	- Add copy/paste support for results

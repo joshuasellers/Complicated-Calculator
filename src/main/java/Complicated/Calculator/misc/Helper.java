@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
 public final class Helper {
     private Helper() {
         // private constructor to prevent instantiation
@@ -136,8 +138,10 @@ public final class Helper {
         // pop all the remaining operators from
         // the stack and append them to output
         while (!stack.isEmpty()) {
-            if (stack.peek().equals("("))
+            if (stack.peek().equals("(")){
+                JOptionPane.showMessageDialog(null, "Mismatched parentheses in expression", "Error", JOptionPane.ERROR_MESSAGE);
                 return "This expression is invalid";
+            }
             System.out
                 .println("Popping remaining from stack to output: " + stack.peek());
             output += stack.pop();
@@ -180,6 +184,9 @@ public final class Helper {
                         case "ln":
                             stack.push(AdvancedMath.ln(operand1));
                             break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Unknown operator: " + token, "Error", JOptionPane.ERROR_MESSAGE);
+                            throw new IllegalArgumentException("Unknown operator: " + token);
                     }
                     continue; // Skip the rest of the loop
                 }
@@ -202,6 +209,9 @@ public final class Helper {
                     case "^":
                         stack.push(Math.pow(operand2, operand1));
                         break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Unknown operator: " + token, "Error", JOptionPane.ERROR_MESSAGE);
+                        throw new IllegalArgumentException("Unknown operator: " + token);
                 }
             }
         }

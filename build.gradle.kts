@@ -3,7 +3,7 @@
  *
  * This generated file contains a sample Java project to get you started.
  * For more details take a look at the Java Quickstart chapter in the Gradle
- * User Manual available at https://docs.gradle.org/5.6.4/userguide/tutorial_java_projects.html
+ * User Manual available at https://docs.gradle.org/8.5/userguide/tutorial_java_projects.html
  */
 
 plugins {
@@ -31,7 +31,7 @@ dependencies {
 
 application {
     // Define the main class for the application
-    mainClassName = "Complicated.Calculator.App"
+    mainClass.set("Complicated.Calculator.App")
 }
 
 // Explicitly configure the test task to use JUnit 4 (safe for existing JUnit4 tests)
